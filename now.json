@@ -6,7 +6,8 @@
         "NODE_ENV": "production",
         "COMMUNITY_NAME": "Tver.io",
         "SLACK_URL": "tverio.slack.com",
-        "SLACK_TOKEN": "@slack-token"
+        "SLACK_TOKEN": "@slack-token",
+        "LOCALE": "ru"
     },
     "routes": [
         { "src": "^/(.*)", "dest": "index.js" }
