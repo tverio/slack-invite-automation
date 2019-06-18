@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "name": "slack",
+    "builds": [{ "src": "index.js", "use": "@now/node-server" }],
+    "env": {
+        "NODE_ENV": "production",
+        "COMMUNITY_NAME": "Tver.io",
+        "SLACK_URL": "tverio.slack.com",
+        "SLACK_TOKEN": "@slack-token"
+    },
+    "routes": [
+        { "src": "^/(.*)", "dest": "index.js" }
+    ]
+}
