@@ -4,24 +4,35 @@ html
     meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title #{__('TITLE', community)}
+    link(href="fonts/futura-face.css", rel="stylesheet", type="text/css")
+    link(href="css/reset.css", rel="stylesheet", type="text/css")
     link(href="css/style.css", rel="stylesheet", type="text/css")
-    link(href="//fonts.googleapis.com/css?family=Lato:300,400,700,900,700italic|Open+Sans:700italic,400,600,300,700,800", rel="stylesheet", type="text/css")
   body
-    #wrapper
-      .main
+    .section-wrapper#wrapper
+      .center-section
         .header
-          h1
-            strong #{community}
-          h2 #{__('HEADER', community)}
+          img(src="/images/logo_black.png").logo.logo--main
+          h1.heading-h1.header__title #{"Tver.io"}
+          h2.heading-h2 #{"Тверское IT-сообщество"}
+      .center-section.center-section--content
         .content
           .information
             form(method="POST", action="invite")#join-form.form
-              input(type="email", name="email", autofocus, placeholder=__('ENTER_EMAIL'))#slack-email.field
-              if tokenRequired
-                input(type="text", name="token", placeholder=__('ENTER_TOKEN'))#slack-token.field
-              input(type="submit", value="Join").submit
+              p.label #{"Присоединитесь к сообществу Tver.io в Slack:"}
+              .inline-form
+                input(type="email", name="email", autofocus, placeholder=__('ENTER_EMAIL'))#slack-email.field
+                if tokenRequired
+                  input(type="text", name="token", placeholder=__('ENTER_TOKEN'))#slack-token.field
+                input(type="submit", value="Присоединиться").submit
               if !!recaptchaSiteKey
                 div(class="g-recaptcha", data-sitekey=recaptchaSiteKey)
+      .center-section.center-section--footer
+        .footer
+          p.footer__copyright #{"© 2019 Tver.io"}
+          .footer__separator
+          .footer__links
+            .a(href="http://tver.io/privacy").footer__link #{"Privacy policy"}
+            .a(href="http://tver.io/terms").footer__link #{"Terms of use"}
     if !!recaptchaSiteKey
        script(src='https://www.google.com/recaptcha/api.js')
     script.
