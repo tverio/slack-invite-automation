@@ -169,6 +169,12 @@ body {
     justify-content: center;
 }
 
+@media (max-width: 767px) {
+    .center-section--content {
+        margin-top: 4em;
+    }
+}
+
 .submit {
     height: 58px;
     width: 220px;
