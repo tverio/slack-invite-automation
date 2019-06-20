@@ -1,18 +1,9 @@
 Slack Invite Automation
 ------------
 
-[![Build Status](https://travis-ci.com/outsideris/slack-invite-automation.svg?branch=master)](https://travis-ci.com/outsideris/slack-invite-automation)
+[![Build Status](https://travis-ci.com/tverio/slack-invite-automation.svg?branch=master)](https://travis-ci.com/tverio/slack-invite-automation)
 
-A tiny web application to invite a user into your Slack team.
-
-Inspired by
-[How I hacked Slack into a community platform with Typeform](https://levels.io/slack-typeform-auto-invite-sign-ups/)
-and Socket.io's Slack page.
-
-This project supports Heroku, Azure, Cloud Foundry, and Amazon Web Services (AWS).
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-[![Deploy to Azure](http://azuredeploy.net/deploybutton.png)](https://azuredeploy.net/)
+A tiny web application to invite a user into Tver.op. [Original repo](https://github.com/outsideris/slack-invite-automation)
 
 ## Settings
 
@@ -63,29 +54,25 @@ You can test your token via curl:
    --compressed
   ```
 
-### Heroku / Azure
-
-Add the application settings that are defined in the environment variables above.
-
-### Amazon Web Services (AWS)
-
-If you have an AWS account and have already installed and configured the AWS CLI tool, you can easily deploy this application to API Gateway and Lambda via CloudFormation in a few minutes.
-
-Instead of editing `config.js`, take these steps:
-
-1. Copy `aws/config.example.sh` to `aws/config.sh`
-2. Edit the values in `aws/config.sh`, which correspond to the variables described above, plus these:
-    * `StackName`: the name of the CloudFormation stack to create
-    * `S3BucketArtifacts`: the name of an existing S3 bucket you have write access to, for storing deployment artifacts
-    * `S3PrefixArtifacts`: the prefix to use within that S3 bucket for all deployment artifacts written
-3. Run `aws/deploy.sh` to create the CloudFormation stack and deploy your application, outputting the URL
-4. (Optional) For a friendlier URL, log into the AWS web console and establish a custom domain pointing to the API Gateway stage deployed in step 3.
+### Zeit
+* Configure secret:
+  ```bash
+  now secret add slack-token <slack token here>
+  ```
+* Deploy
+  ```bash
+  npm run deploy
+  ```
+  or
+  ```bash
+  now
+  ```
 
 ## Run
 [Node.js](http://nodejs.org/) is required.
 
 ```shell
-$ git clone https://github.com/outsideris/slack-invite-automation.git
+$ git clone git@github.com:tverio/slack-invite-automation.git
 $ cd slack-invite-automation
 $ npm install
 $ npm start
@@ -93,26 +80,7 @@ $ npm start
 
 You can access <http://localhost:3000> on your web browser.
 
-![](screenshots/join-page.jpg)
-
-## Run with Docker
-
-It's easy to run this service if you have installed Docker on your system.
-Pull [the Docker image from Docker Hub](https://hub.docker.com/r/outsideris/slack-invite-automation/).
-
-```shell
-$ docker pull outsideris/slack-invite-automation
-$ docker run -it --rm -e COMMUNITY_NAME="YOUR-TEAM-NAME" -e SLACK_URL="YOUR-TEAM.slack.com" -e SLACK_TOKEN="YOUR-ACCESS-TOKEN" -p 3000:3000 outsideris/slack-invite-automation
-```
-
-Or, You can build a Docker image yourself.
-
-```shell
-$ git clone https://github.com/outsideris/slack-invite-automation.git
-$ cd slack-invite-automation
-$ docker build -t outsideris/slack-invite-automation .
-$ docker run -it --rm -e COMMUNITY_NAME="YOUR-TEAM-NAME" -e SLACK_URL="YOUR-TEAM.slack.com" -e SLACK_TOKEN="YOUR-ACCESS-TOKEN" -p 3000:3000 outsideris/slack-invite-automation
-```
+![](screenshots/join-page.png)
 
 ## Issue token
 **You should generate the token in admin user, not owner.** If you generate the token in owner user, a `missing_scope` error may occur.
@@ -175,23 +143,3 @@ You can use the badge to show status of user in your slack.
     ```
     <img src="https://your.domain/badge.svg?colorA=155799&colorB=159957">
     ```
-
-## reCAPTCHA
-Register a new site in [Google reCAPTHCA](https://www.google.com/recaptcha/)
-as reCAPTCHA v2 type.
-
-![](screenshots/recaptcha.gif)
-
-Set "Site key" as `recaptchaSiteKey` or `RECAPTCHA_SITE`,
-and "Secret key" as `recaptchaSecretKey` or `RECAPTCHA_SECRET`.
-
-## Associate fork with heroku
-If you use the "Deploy to Heroku" button and want to modify your App you should
-fork this project. After forking and making changes you should associate your
-repo with the deployed instance by running:
-
-`$ heroku git:remote -a thawing-inlet-61413` replacing your heroku app's name
-and running
-
-`$ git push heroku master` to upload the changes. For full details see
-[Heroku: deploying with git](https://devcenter.heroku.com/articles/git#for-an-existing-heroku-app)
